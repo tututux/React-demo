@@ -1,6 +1,24 @@
 import React, { useEffect } from "react";
 import importedComponent from "react-imported-component";
 import { DefaultComponentImport } from "react-imported-component/dist/es5/types";
+import Nprogress from "nprogress";
+import "nprogress/nprogress.css";
+
+/**
+ * @name LoadableLoading
+ * @description 页面加载动画
+ */
+const LoadableLoading: React.FunctionComponent<{ children?: any }> = React.memo(
+  ({ children }) => {
+    useEffect(() => {
+      Nprogress.start();
+      return () => {
+        Nprogress.done();
+      };
+    }, []);
+    return children || null;
+  }
+);
 
 /**
  * @name ErrorComponent
@@ -8,10 +26,8 @@ import { DefaultComponentImport } from "react-imported-component/dist/es5/types"
  */
 const ErrorComponent: React.FunctionComponent = React.memo(() => {
   useEffect(() => {
-    let loader = document.getElementById("launch-loader");
-    if (loader) loader.style.display = "none";
+    Nprogress.done();
   }, []);
-
   return <div>点击刷新页面</div>;
 });
 
@@ -21,11 +37,11 @@ const ErrorComponent: React.FunctionComponent = React.memo(() => {
  * @param {Function} loader - () => import('a'), or () => require('b')
  */
 const lazyLoad = (
-  loader: DefaultComponentImport<any>
-  // LoadingComponent?: any
+  loader: DefaultComponentImport<any>,
+  LoadingChildren?: any
 ) => {
   return importedComponent(loader, {
-    // LoadingComponent:LoadingComponent
+    LoadingComponent: () => <LoadableLoading children={LoadingChildren} />,
     ErrorComponent,
   });
 };
