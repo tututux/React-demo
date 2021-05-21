@@ -1,5 +1,5 @@
 const CracoLessPlugin = require("craco-less");
-const CracoAntDesignPlugin = require("craco-less");
+const CracoAntDesignPlugin = require("craco-antd");
 const { getCSSModuleLocalIdent } = require("./.craco.plugins.js");
 
 /// less 变量覆盖 --- 修改默认主题色、字体等

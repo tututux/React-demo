@@ -3,14 +3,14 @@ import deploy from "config";
 import { getToken } from "utils/util";
 
 // 创建实例时设置配置的默认值
-const HttpUtil = axios.create({
+const requestUtil = axios.create({
   baseURL: deploy.SERVER_URL,
   timeout: 60000,
   // headers: {}
 });
 
 // 添加请求拦截器
-HttpUtil.interceptors.request.use(
+requestUtil.interceptors.request.use(
   async (config: AxiosRequestConfig) => {
     /// 设置请求头 Authorization
     if (config.headers["Authorization"] === undefined) {
@@ -30,7 +30,7 @@ HttpUtil.interceptors.request.use(
 );
 
 // 添加响应拦截器
-HttpUtil.interceptors.response.use(
+requestUtil.interceptors.response.use(
   (response) => {
     // 对响应数据做点什么
     return response.data;
@@ -43,4 +43,4 @@ HttpUtil.interceptors.response.use(
   }
 );
 
-export default HttpUtil;
+export default requestUtil;
