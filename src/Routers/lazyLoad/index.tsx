@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useMount, useUnmount } from "ahooks";
 import importedComponent from "react-imported-component";
 import { DefaultComponentImport } from "react-imported-component/dist/es5/types";
 import Nprogress from "nprogress";
@@ -10,12 +11,13 @@ import "nprogress/nprogress.css";
  */
 const LoadableLoading: React.FunctionComponent<{ children?: any }> = React.memo(
   ({ children }) => {
-    useEffect(() => {
+    useMount(() => {
       Nprogress.start();
-      return () => {
-        Nprogress.done();
-      };
-    }, []);
+    });
+    useUnmount(() => {
+      Nprogress.done();
+    });
+
     return children || null;
   }
 );
@@ -25,9 +27,9 @@ const LoadableLoading: React.FunctionComponent<{ children?: any }> = React.memo(
  * @description 页面加载失败提示
  */
 const ErrorComponent: React.FunctionComponent = React.memo(() => {
-  useEffect(() => {
+  useMount(() => {
     Nprogress.done();
-  }, []);
+  });
   return <div>点击刷新页面</div>;
 });
 
