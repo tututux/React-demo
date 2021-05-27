@@ -33,6 +33,7 @@ export const isNumber = new RegExp('[0-9]+');
 
 //匹配网址
 export const reURL = new RegExp('([hH][tT]{2}[pP]://|[hH][tT]{2}[pP][sS]://)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~/])+');
+export const reURL2 = new RegExp('(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]');
 
 //@字符匹配
 export const reAite = /@(.*?)\s/;
