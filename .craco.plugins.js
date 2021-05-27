@@ -1,6 +1,5 @@
 const loaderUtils = require("loader-utils");
 const path = require("path");
-const fs = require("fs-extra");
 
 /**
  * @name getCSSModuleLocalIdent
