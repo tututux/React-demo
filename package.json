@@ -30,9 +30,10 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test"
+    "start": "craco start --config .craco.config.js",
+    "start:pro": "cross-env REACT_APP_NODE_ENV=production craco start --config .craco.config.js",
+    "build": "craco build --config .craco.config.js",
+    "test": "cross-env REACT_APP_NODE_ENV=test craco build --config .craco.config.js"
   },
   "eslintConfig": {
     "extends": [
